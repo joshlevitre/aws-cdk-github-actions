@@ -10,6 +10,13 @@ function parseInputs(){
 	fi
 }
 
+function installDeno(){
+	echo "Installing Deno v1.35.0"
+	curl -fsSL https://deno.land/x/install/install.sh | sh -s v1.35.0
+	export DENO_INSTALL="/root/.deno"
+	export PATH="$DENO_INSTALL/bin:$PATH"
+}
+
 function installTypescript(){
 	npm install typescript
 }
@@ -99,6 +106,7 @@ ${output}
 function main(){
 	parseInputs
 	cd ${GITHUB_WORKSPACE}/${INPUT_WORKING_DIR}
+ 	installDeno
 	installTypescript
 	installAwsCdk
 	installPipRequirements
